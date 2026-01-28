@@ -18,8 +18,8 @@ fieldDecoratorKit.setDecorator({
     * 也支持配置链接
     **/
     icon: { // 当前平台的图标
-      light: '',
-      dark: ''
+      light: 'https://saas.jcbbi.com/upload/avatar/745470592254021.png',
+      dark: 'https://saas.jcbbi.com/upload/avatar/745470592254021.png'
     }
   },
   // 定义捷径的i18n语言资源
