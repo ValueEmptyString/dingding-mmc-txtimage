@@ -2,7 +2,7 @@ import { FieldType, fieldDecoratorKit, FormItemComponent, FieldExecuteCode, Auth
 const { t } = fieldDecoratorKit;
 
 // 通过addDomainList添加请求接口的域名
-fieldDecoratorKit.setDomainList(['api.exchangerate-api.com', 'alidocs2-zjk-cdn.dingtalk.com', 'api.ezlinkai.com', 'saas.jcbbi.com', 'jcbbi.com']);
+fieldDecoratorKit.setDomainList(['api.exchangerate-api.com', 'alidocs2-zjk-cdn.dingtalk.com', 'api.ezlinkai.com', 'saas.jcbbi.com', 'jcbbi.com','www.mmcjt.cn']);
 
 fieldDecoratorKit.setDecorator({
   name: '图像生成',
@@ -11,15 +11,15 @@ fieldDecoratorKit.setDecorator({
     platform: '毛毛虫',// 授权平台，目前可以填写当前平台名称
     type: AuthorizationType.HeaderBearerToken, // 授权类型
     required: false,// 设置为选填，用户如果填了授权信息，请求中则会携带授权信息，否则不带授权信息
-    instructionsUrl: "https://saas.jcbbi.com/",// 帮助链接，告诉使用者如何填写这个apikey
-    label: '测试授权', // 授权平台，告知用户填写哪个平台的信息
+    instructionsUrl: "https://www.mmcjt.cn/",// 帮助链接，告诉使用者如何填写这个apikey
+    label: '授权', // 授权平台，告知用户填写哪个平台的信息
     tooltips: '请配置授权', // 提示，引导用户添加授权
     /**
     * 也支持配置链接
     **/
     icon: { // 当前平台的图标
-      light: 'https://saas.jcbbi.com/upload/avatar/745470592254021.png',
-      dark: 'https://saas.jcbbi.com/upload/avatar/745470592254021.png'
+      light: './logo.png',
+      dark: './logo.png'
     }
   },
   // 定义捷径的i18n语言资源
@@ -27,10 +27,27 @@ fieldDecoratorKit.setDecorator({
     'zh-CN': {
         "param_image_label": "图片",
         "param_prompt_label": "提示词",
+        "param_temperature_label": "Temperature",
+        "param_top_p_label": "topP",
+        "param_top_K_label": "topK",
+        "param_candidateCount_label": "candidateCount",
+
     }
   },
   // 定义捷径的入参
   formItems: [
+    {
+      key: 'prompt',
+      label: t('param_prompt_label'),
+      component: FormItemComponent.Textarea,
+      props: {
+        placeholder: '请输入图片编辑指令',
+        enableFieldReference: true,
+      },
+      validator: {
+        required: true,
+      }
+    },
     {
       key: 'imageUrl1',
       label: `${t('param_image_label')}`,
@@ -43,17 +60,49 @@ fieldDecoratorKit.setDecorator({
       }
     },
     {
-      key: 'prompt',
-      label: t('param_prompt_label'),
+      key: 'temperature',
+      label: t('param_temperature_label'),
       component: FormItemComponent.Textarea,
       props: {
-        placeholder: '请输入图片编辑指令',
-        enableFieldReference: true,
+        placeholder: '请输入0.0-2.0之间数字',
       },
       validator: {
-        required: true,
+        required: false,
       }
-    }
+    },
+    {
+      key: 'topP',
+      label: t('param_top_p_label'),
+      component: FormItemComponent.Textarea,
+      props: {
+        placeholder: '请输入0.0-1.0之间数字',
+      },
+      validator: {
+        required: false,
+      }
+    },
+    {
+      key: 'topK',
+      label: t('param_top_K_label'),
+      component: FormItemComponent.Textarea,
+      props: {
+        placeholder: '请输入10-100之间数字',
+      },
+      validator: {
+        required: false,
+      }
+    },
+    {
+      key: 'candidateCount',
+      label: t('param_candidateCount_label'),
+      component: FormItemComponent.Textarea,
+      props: {
+        placeholder: '请输入1-8之间数字',
+      },
+      validator: {
+        required: false,
+      }
+    },
   ],
   // 定义捷径的返回结果类型
   resultType: {
@@ -65,11 +114,6 @@ fieldDecoratorKit.setDecorator({
     try {
       // 1. 调用Gemini API
       const url = 'https://api.ezlinkai.com/v1beta/models/gemini-3-pro-preview:generateContent';
-
-       const headers = {
-        'Content-Type': 'application/json',
-        'Authorization': 'Bearer 2O13DgDpmdia619m9c14E981149347068808B386A17bCbAb'
-      };
 
       // Build request payload
       const requestBody: any = {
@@ -120,7 +164,6 @@ fieldDecoratorKit.setDecorator({
 
       const init = {
         method: 'POST',
-        headers,
         body: JSON.stringify(requestBody)
       };
 

@@ -6,32 +6,22 @@
     "zh-CN": {
       "param_image_label": "图片",
       "param_prompt_label": "提示词",
-      "param_model_label": "型号"
+      "param_temperature_label": "Temperature",
+      "param_top_p_label": "topP",
+      "param_top_K_label": "topK",
+      "param_candidateCount_label": "candidateCount"
     }
   },
   "isDebug": true,
   "fields": [
     {
-      "fieldType": "file",
+      "fieldType": "text",
       "uiSchema": {
         "fieldMetaEditor": {
           "component": "FieldMetaEditor",
           "props": {
             "schema": {
               "items": [
-                {
-                  "key": "imageUrl1",
-                  "label": "${{param_image_label}}",
-                  "component": "FieldSelect",
-                  "props": {
-                    "supportTypes": [
-                      "file"
-                    ]
-                  },
-                  "validator": {
-                    "required": true
-                  }
-                },
                 {
                   "key": "prompt",
                   "label": "${{param_prompt_label}}",
@@ -45,15 +35,60 @@
                   }
                 },
                 {
-                  "key": "model",
-                  "label": "${{param_model_label}}",
-                  "component": "Textarea",
+                  "key": "imageUrl1",
+                  "label": "${{param_image_label}}",
+                  "component": "FieldSelect",
                   "props": {
-                    "placeholder": "请输入型号",
-                    "enableFieldReference": true
+                    "supportTypes": [
+                      "file"
+                    ]
                   },
                   "validator": {
-                    "required": true
+                    "required": false
+                  }
+                },
+                {
+                  "key": "temperature",
+                  "label": "${{param_temperature_label}}",
+                  "component": "Textarea",
+                  "props": {
+                    "placeholder": "请输入0.0-2.0之间数字"
+                  },
+                  "validator": {
+                    "required": false
+                  }
+                },
+                {
+                  "key": "topP",
+                  "label": "${{param_top_p_label}}",
+                  "component": "Textarea",
+                  "props": {
+                    "placeholder": "请输入0.0-1.0之间数字"
+                  },
+                  "validator": {
+                    "required": false
+                  }
+                },
+                {
+                  "key": "topK",
+                  "label": "${{param_top_K_label}}",
+                  "component": "Textarea",
+                  "props": {
+                    "placeholder": "请输入10-100之间数字"
+                  },
+                  "validator": {
+                    "required": false
+                  }
+                },
+                {
+                  "key": "candidateCount",
+                  "label": "${{param_candidateCount_label}}",
+                  "component": "Textarea",
+                  "props": {
+                    "placeholder": "请输入1-8之间数字"
+                  },
+                  "validator": {
+                    "required": false
                   }
                 }
               ],
@@ -62,12 +97,12 @@
                 "platform": "毛毛虫",
                 "type": "HeaderBearerToken",
                 "required": false,
-                "instructionsUrl": "https://saas.jcbbi.com/",
-                "label": "测试授权",
+                "instructionsUrl": "https://www.mmcjt.cn/",
+                "label": "授权",
                 "tooltips": "请配置授权",
                 "icon": {
-                  "light": "",
-                  "dark": ""
+                  "light": "./logo.png",
+                  "dark": "./logo.png"
                 }
               }
             }

@@ -15,7 +15,7 @@ function _asyncToGenerator(n) { return function () { var t = this, e = arguments
 var t = _dingtalkDocsCoolApp.fieldDecoratorKit.t;
 
 // 通过addDomainList添加请求接口的域名
-_dingtalkDocsCoolApp.fieldDecoratorKit.setDomainList(['api.exchangerate-api.com', 'alidocs2-zjk-cdn.dingtalk.com', 'api.ezlinkai.com', 'saas.jcbbi.com', 'jcbbi.com']);
+_dingtalkDocsCoolApp.fieldDecoratorKit.setDomainList(['api.exchangerate-api.com', 'alidocs2-zjk-cdn.dingtalk.com', 'api.ezlinkai.com', 'saas.jcbbi.com', 'jcbbi.com', 'www.mmcjt.cn']);
 _dingtalkDocsCoolApp.fieldDecoratorKit.setDecorator({
   name: '图像生成',
   authorizations: {
@@ -27,9 +27,9 @@ _dingtalkDocsCoolApp.fieldDecoratorKit.setDecorator({
     // 授权类型
     required: false,
     // 设置为选填，用户如果填了授权信息，请求中则会携带授权信息，否则不带授权信息
-    instructionsUrl: "https://saas.jcbbi.com/",
+    instructionsUrl: "https://www.mmcjt.cn/",
     // 帮助链接，告诉使用者如何填写这个apikey
-    label: '测试授权',
+    label: '授权',
     // 授权平台，告知用户填写哪个平台的信息
     tooltips: '请配置授权',
     // 提示，引导用户添加授权
@@ -38,29 +38,23 @@ _dingtalkDocsCoolApp.fieldDecoratorKit.setDecorator({
     **/
     icon: {
       // 当前平台的图标
-      light: 'https://saas.jcbbi.com/upload/avatar/745470592254021.png',
-      dark: 'https://saas.jcbbi.com/upload/avatar/745470592254021.png'
+      light: './logo.png',
+      dark: './logo.png'
     }
   },
   // 定义捷径的i18n语言资源
   i18nMap: {
     'zh-CN': {
       "param_image_label": "图片",
-      "param_prompt_label": "提示词"
+      "param_prompt_label": "提示词",
+      "param_temperature_label": "Temperature",
+      "param_top_p_label": "topP",
+      "param_top_K_label": "topK",
+      "param_candidateCount_label": "candidateCount"
     }
   },
   // 定义捷径的入参
   formItems: [{
-    key: 'imageUrl1',
-    label: "".concat(t('param_image_label')),
-    component: _dingtalkDocsCoolApp.FormItemComponent.FieldSelect,
-    props: {
-      supportTypes: [_dingtalkDocsCoolApp.FieldType.Attachment]
-    },
-    validator: {
-      required: false
-    }
-  }, {
     key: 'prompt',
     label: t('param_prompt_label'),
     component: _dingtalkDocsCoolApp.FormItemComponent.Textarea,
@@ -71,6 +65,56 @@ _dingtalkDocsCoolApp.fieldDecoratorKit.setDecorator({
     validator: {
       required: true
     }
+  }, {
+    key: 'imageUrl1',
+    label: "".concat(t('param_image_label')),
+    component: _dingtalkDocsCoolApp.FormItemComponent.FieldSelect,
+    props: {
+      supportTypes: [_dingtalkDocsCoolApp.FieldType.Attachment]
+    },
+    validator: {
+      required: false
+    }
+  }, {
+    key: 'temperature',
+    label: t('param_temperature_label'),
+    component: _dingtalkDocsCoolApp.FormItemComponent.Textarea,
+    props: {
+      placeholder: '请输入0.0-2.0之间数字'
+    },
+    validator: {
+      required: false
+    }
+  }, {
+    key: 'topP',
+    label: t('param_top_p_label'),
+    component: _dingtalkDocsCoolApp.FormItemComponent.Textarea,
+    props: {
+      placeholder: '请输入0.0-1.0之间数字'
+    },
+    validator: {
+      required: false
+    }
+  }, {
+    key: 'topK',
+    label: t('param_top_K_label'),
+    component: _dingtalkDocsCoolApp.FormItemComponent.Textarea,
+    props: {
+      placeholder: '请输入10-100之间数字'
+    },
+    validator: {
+      required: false
+    }
+  }, {
+    key: 'candidateCount',
+    label: t('param_candidateCount_label'),
+    component: _dingtalkDocsCoolApp.FormItemComponent.Textarea,
+    props: {
+      placeholder: '请输入1-8之间数字'
+    },
+    validator: {
+      required: false
+    }
   }],
   // 定义捷径的返回结果类型
   resultType: {
@@ -79,18 +123,14 @@ _dingtalkDocsCoolApp.fieldDecoratorKit.setDecorator({
   // formItemParams 为运行时传入的字段参数，对应字段配置里的 formItems （如引用的依赖字段）
   execute: function () {
     var _execute = _asyncToGenerator(/*#__PURE__*/_regenerator().m(function _callee(context, formData) {
-      var imageUrl1, prompt, _imageUrl1$, url, headers, requestBody, image, imageResponse, arrayBuffer, buffer, base64, contentType, init, res, resJson, resultText, candidate, content, _iterator, _step, part, _t, _t2, _t3, _t4;
+      var imageUrl1, prompt, _imageUrl1$, url, requestBody, image, imageResponse, arrayBuffer, buffer, base64, contentType, init, res, resJson, resultText, candidate, content, _iterator, _step, part, _t, _t2, _t3, _t4;
       return _regenerator().w(function (_context) {
         while (1) switch (_context.p = _context.n) {
           case 0:
             imageUrl1 = formData.imageUrl1, prompt = formData.prompt;
             _context.p = 1;
             // 1. 调用Gemini API
-            url = 'https://api.ezlinkai.com/v1beta/models/gemini-3-pro-preview:generateContent';
-            headers = {
-              'Content-Type': 'application/json',
-              'Authorization': 'Bearer 2O13DgDpmdia619m9c14E981149347068808B386A17bCbAb'
-            }; // Build request payload
+            url = 'https://api.ezlinkai.com/v1beta/models/gemini-3-pro-preview:generateContent'; // Build request payload
             requestBody = {
               model: "gemini-3-pro-preview",
               "contents": [{
@@ -142,7 +182,6 @@ _dingtalkDocsCoolApp.fieldDecoratorKit.setDecorator({
             });
             init = {
               method: 'POST',
-              headers: headers,
               body: JSON.stringify(requestBody)
             }; // 直接使用context.fetch
             _context.n = 7;
