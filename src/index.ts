@@ -18,8 +18,8 @@ fieldDecoratorKit.setDecorator({
     * 也支持配置链接
     **/
     icon: { // 当前平台的图标
-      light: 'http://bangbang.keimsoft.com/MMC-LOGO.jpg',
-      dark: 'http://bangbang.keimsoft.com/MMC-LOGO.jpg'
+      light: 'https://saas.jcbbi.com/upload/2026/01/29/767965034025029.jpg',
+      dark: 'https://saas.jcbbi.com/upload/2026/01/29/767965034025029.jpg'
     }
   },
   // 定义捷径的i18n语言资源

@@ -101,8 +101,8 @@
                 "label": "授权",
                 "tooltips": "请配置授权",
                 "icon": {
-                  "light": "./logo.png",
-                  "dark": "./logo.png"
+                  "light": "http://bangbang.keimsoft.com/MMC-LOGO.jpg",
+                  "dark": "http://bangbang.keimsoft.com/MMC-LOGO.jpg"
                 }
               }
             }

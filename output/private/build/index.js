@@ -38,8 +38,8 @@ _dingtalkDocsCoolApp.fieldDecoratorKit.setDecorator({
     **/
     icon: {
       // 当前平台的图标
-      light: './logo.png',
-      dark: './logo.png'
+      light: 'http://bangbang.keimsoft.com/MMC-LOGO.jpg',
+      dark: 'http://bangbang.keimsoft.com/MMC-LOGO.jpg'
     }
   },
   // 定义捷径的i18n语言资源
